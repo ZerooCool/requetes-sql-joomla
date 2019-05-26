@@ -113,7 +113,7 @@ $size = "4";
     }
 echo "Le mot de passe aléatoire est $newpassword<br/>";
 
-// Ajouter l'identifiant utilisateur :
+// Ajouter l'identifiant utilisateur à la fin du mot de passe :
 $newpassword .= $row['id'];
 
 // Le mot de passe généré est de la forme ENTREPRISEzY?E153
