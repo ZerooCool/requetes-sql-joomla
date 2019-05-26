@@ -76,17 +76,18 @@ $xml = '<?xml version="1.0" encoding="UTF-8"?>'.'<selection>';
 		fputs($fp, $xml);
 		fclose($fp);
 // Consulter le fichier qui a été créé :
-echo 'Export XML effectue : <a href="fichier-selection.xml">Voir le fichier</a>';
+echo '<br/><br/>Export XML effectue : <a href="fichier-selection.xml">Voir le fichier</a><br/><br/><br/>';
+
 
 
 
 
 // Déclarer la requête pour lister les ID utilisateurs et le login associé :
 $p = "SELECT id, username FROM $table_utilisateurs";
-echo "Afficher la requête pour connaître les ID utilisateurs :<br/>$p<br/><br/>";
+echo "Afficher la requête pour connaître les ID utilisateurs :<br/>$p<br/><br/><br/>";
 
 // Afficher le rendu de la requête ID utilisateurs et le login associé :
-echo "<br/><br/>Afficher le rendu de la requête :<br/>";
+echo "Afficher le rendu de la requête :<br/>";
 $stmt = $pdo->prepare($p);
  
 // Execution de la requête :
@@ -99,9 +100,23 @@ $rowAll = $stmt->fetchAll(PDO::FETCH_BOTH);
 // Le rendu de la requête sous forme de liste :
 foreach( $rowAll as $row )
 {
-// Déclarer une variable pour stocker un nouveau mot de passe utilisateur basé sur un unique mot (secret) et l'identifiant utilisateur (exemple : secret191) :
-$newpassword = "secret";
+// Déclarer une variable pour stocker un nouveau mot de passe utilisateur basé sur un unique mot (DAMIEN), puis une chaîne aléatoire, et l'identifiant utilisateur (exemple : ENTREPRISEzY?E153) :
+$newpassword = "ENTREPRISE";
+
+// Ajouter un mot de passe aléatoire :
+$size = "4";
+// Initialisation des caractères utilisables :
+    $characters = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "+", "@", "!", "$", "%", "?", "&");
+    for($i=0;$i<$size;$i++)
+    {
+        $newpassword .= ($i%2) ? strtoupper($characters[array_rand($characters)]) : $characters[array_rand($characters)];
+    }
+echo "Le mot de passe aléatoire est $newpassword<br/>";
+
+// Ajouter l'identifiant utilisateur :
 $newpassword .= $row['id'];
+
+// Le mot de passe généré est de la forme ENTREPRISEzY?E153
 
 // Lister la proposition de changement de mot de passe pour tous les utilisateurs.
 echo 'Utilisateurs ID : '.$row['id'].' - Login  : '.$row['username'].' - Nouveau mot de passe : '.$newpassword.'<br />';
@@ -136,7 +151,7 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 
 // Message pour informer que la mise à jour a été effectuée :
-echo $stmt->rowCount() . "<br/> Mise à jour effectuée !";
+echo "Mise à jour effectuée !";
 }
 catch(PDOException $e)
 {
