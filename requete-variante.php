@@ -100,10 +100,10 @@ $rowAll = $stmt->fetchAll(PDO::FETCH_BOTH);
 // Le rendu de la requête sous forme de liste :
 foreach( $rowAll as $row )
 {
-// Déclarer une variable pour stocker un nouveau mot de passe utilisateur basé sur un unique mot (DAMIEN), puis une chaîne aléatoire, et l'identifiant utilisateur (exemple : ENTREPRISEzY?E153) :
+// Déclarer une variable pour stocker un nouveau mot de passe utilisateur basé sur un unique mot (ENTREPRISE), puis une chaîne aléatoire, et l'identifiant utilisateur (exemple : ENTREPRISEzY?E153) :
 $newpassword = "ENTREPRISE";
 
-// Ajouter un mot de passe aléatoire :
+// Ajouter un mot de passe aléatoire à la suite de $newpassword :
 $size = "4";
 // Initialisation des caractères utilisables :
     $characters = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "+", "@", "!", "$", "%", "?", "&");
